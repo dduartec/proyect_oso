@@ -36,7 +36,7 @@ if (isset($_POST['token'])) {
     }
 } elseif (isset($_POST['correo'])) {
     $query1 = "SELECT * FROM psicologos WHERE correo= :correo";
-    $query2 = "SELECT * FROM co-talleristas WHERE correo= :correo";
+    $query2 = 'SELECT * FROM `co-talleristas` WHERE correo= :correo';
 
     $correo = $_POST['correo'];
 
@@ -48,7 +48,7 @@ if (isset($_POST['token'])) {
 
     $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
     if ($row1['id'] > 0) {
-        $token=enviarCorreo($correo);
+        $token = enviarCorreo($correo);
         echo '<div class="row">
         <div class="col-sm-8 offset-sm-2 myform-cont">
             <form method="post" class="">
@@ -63,26 +63,31 @@ if (isset($_POST['token'])) {
             </form>
         </div>
     </div>';
+        exit();
     }
     $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
     if ($row2['id'] > 0) {
-        enviarCorreo($correo);
+        $token=enviarCorreo($correo);
         echo '<div class="row">
         <div class="col-sm-8 offset-sm-2 myform-cont">
-            <form method="post" class="">
-                <div class="form-group">
-                    <input type="hidden" name="nombre" value="' . $row2['nombre'] . '" />
-                    <input type="hidden" name="id" value="' . $row2['nombre'] . '" />
-                    <input type="hidden" name="usuario_tipo" value="co-tallerista" />
-                    <input type="text" name="token" placeholder="Token" class="form-control" id="correo"/>
-                </div>
-                <button type="submit" class="mybtn">Ingresar</button>
-            </form>
+        <form method="post" class="">
+        <div class="form-group">
+            <input type="hidden" name="nombre" value="' . $row2['nombre'] . '" />
+            <input type="hidden" name="id" value="' . $row2['id'] . '" />
+            <input type="hidden" name="token" value="' . $token . '" />
+            <input type="hidden" name="usuario_tipo" value="co-tallerista" />
+            <input type="text" name="token_recibido" placeholder="Token" class="form-control" id="correo"/>
+        </div>
+        <button type="submit" class="mybtn">Ingresar</button>
+    </form>
         </div>
     </div>';
+        exit();
     }
     if (!$row1['id'] > 0 && !$row2['id'] > 0) {
-        echo '<div class="error"><h3 class="error">Correo Incorrecto</h3></div>';
+        echo '<div class="error"><h3 class="error">'.$row1['id'].'</h3></div>';
+        echo $row1['id'];
+        echo $row2['id'];
         //header("location:login.php");
     }
 } else {
