@@ -13,9 +13,8 @@ include_once("header.php");
                 header("location:login.php");
                 exit();                
             }
-            echo "<h1>Bienvenido ".$_SESSION['usuario_nombre'] ." !!!!</h1></br>
-            <h3>Estudiantes:</h3>";
-            include("estudiantes.php")
+            echo "<h1>Bienvenido ".$_SESSION['usuario_nombre'] ." !!!!</h1></br>";
+            include("estudiantes.php");
         ?>
     </div>
 </section>

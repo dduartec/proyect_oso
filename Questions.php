@@ -25,7 +25,12 @@ if (!isset($_SESSION)) {
     //print current Options and save de actual answer position
     for ($j = 1; $j <= $OptionsNumber; $j++) {
       $str2 = "option_" . $i . "_" . $j;
-      $options .= $_POST[$str2] . ";";
+      if($j==$OptionsNumber){
+        $options .= $_POST[$str2] ;
+      }else{
+        $options .= $_POST[$str2] . ";";
+      }
+      
       if ($answer_pos == $j) {
         $answer = $_POST[$str2];
       }
