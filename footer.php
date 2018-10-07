@@ -1,9 +1,8 @@
 </footer>
 
 <?php
-include_once('header.php');
 echo '
-    <a href ="index.php">Index</a> |';
+    <a href ="index.php">Inicio</a> |';
     if(func::checkLoginState($dbh)){
         echo '<a href="logout.php">Logout</a>';
     }else{
