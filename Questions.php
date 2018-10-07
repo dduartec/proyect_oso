@@ -34,12 +34,6 @@ if (!isset($_SESSION)) {
     echo 'opciones :' . $options . "<br/>";
     echo "Answer is " . $answer . "<br/>";
 
-/* Cambiar el esquema y los datos de la base de datos */
-    /*$stmt = $dbh->prepare('INSERT INTO `test` (`nombre`) VALUES (:name);')->execute(array(':name'=>$_POST['nombre_prueba']));    
-    $stmt1 = $dbh->prepare('SELECT * FROM `test` WHERE `nombre`=:name;')->execute(array(':name'=>$_POST['nombre_prueba']));
-    $row = $stmt1->fetch();
-    $stmt = $dbh->prepare('INSERT INTO `preguntas`(`enunciado`, `opciones`, `respuesta`, `id_test`) VALUES (:enunciado,:options,:answer,:id);')->exec(array(':enunciado'=>$enunciado,':option'=>$options,':answer'=>$answer,':id'=>$row['id']));
-*/
     $stmt = $dbh->prepare('INSERT INTO `test` (`nombre`) VALUES (?);');
     $stmt->execute([$_POST['nombre_prueba']]);
     $stmt1 = $dbh->prepare('SELECT * FROM `test` WHERE `nombre`=?;');
