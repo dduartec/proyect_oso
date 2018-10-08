@@ -30,25 +30,12 @@ if (!func::checkLoginState($dbh)) {
   <section class="parent">
     <div class="child">
         <?php
-<<<<<<< HEAD
-            if(!func::checkLoginState($dbh)){
-                header("location: login.php");
-            }
-            echo "<h1>Bienvenido ".$_SESSION['usuario_nombre'] ." !!!!</h1></br>";
-            include("estudiantes.php");
-=======
         echo "<h1>Bienvenido " . $_SESSION['usuario_nombre'] . " !!!!</h1></br>";
         include("estudiantes.php");
->>>>>>> a592fe31df4aecae2dd28b26f4ecd47e19ae3b8d
         ?>
     </div>
 </section>
   </body>
   <?php
-<<<<<<< HEAD
-  include_once("footer.php");
-  ?>
-=======
     include_once("footer.php");
     ?>
->>>>>>> a592fe31df4aecae2dd28b26f4ecd47e19ae3b8d
