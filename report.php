@@ -2,7 +2,7 @@
 
   include_once("header.php");
 
-  $sql = 'SELECT * FROM estudiantes JOIN  grupos';
+  $sql = 'SELECT * FROM estudiantes JOIN  grupos WHERE estudiantes.id = grupos.id_estudiante AND grupos."id_co-tallerista" = 1 ';
   foreach ($dbh->query($sql) as $row) {
       print_r($row) ;
       echo "</br>";
