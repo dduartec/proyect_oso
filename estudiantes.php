@@ -13,7 +13,7 @@
             $stmt = $dbh->prepare($query1);
             showEstudiantes($dbh, $stmt);
         } elseif (($_SESSION['usuario_tipo'] == 'director')) {
-            header("location:director.php");
+            //echo'<script language="javascript">window.location="director.php"</script>';
         }
     }
     function showEstudiantes($dbh, $stmt)
@@ -42,6 +42,7 @@
                     <input type="hidden" name="edad" value="' . $edad . '" />
                     <input type="hidden" name="documento" value="' . $documento . '" />
                     <input type="hidden" name="colegio" value="' . $colegio . '" />
+                    <input type="hidden" name="id" value="' . $row['id'] . '" />
                         <button type="submit" name="nombre" class="estudiante">
                                 <p><b>Nombre:</b> ' . $nombre . '</br>
                                 <b>Edad:</b> ' . $edad . '</br>
@@ -57,7 +58,42 @@
 
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        echo '<h3>Estudiante: '.$_POST['name'].'</h3>';
+        echo '<h3>Estudiante: ' . $_POST['name'] . '</h3>';
+        $query = 'SELECT * FROM presentacion_test WHERE id_estudiante=?';
+        $stmt = $dbh->prepare($query);
+        $stmt->execute([$_POST['id']]);
+        $rows = $stmt->fetchAll();
+        echo '<h4>Pruebas presentadas</h4>
+        <table class="table">
+        <tr>
+            <th>Prueba</th>
+            <th>Puntuación</th> 
+        </tr>';
+        foreach ($rows as $r) {
+            $query = 'SELECT * FROM test WHERE id=?';
+            $stmt = $dbh->prepare($query);
+            $stmt->execute([$r['id_test']]);
+            $pruebas_presentadas = $stmt->fetch();
+            echo "<tr>
+                    <th>" . $pruebas_presentadas['nombre'] . "</th>
+                    <th>" . $r['score'] . '</th>
+                    </tr>';
+
+        }
+        echo '</table>';
+        $query = 'SELECT * FROM presentacion_test WHERE id_estudiante=?';
+        $stmt = $dbh->prepare($query);
+        $stmt->execute([$_POST['id']]);
+        $rows = $stmt->fetchAll();
+        echo '<h4>Pruebas sin presentar</h4>';
+        $query = 'SELECT * FROM test WHERE id<>';
+        $stmt = $dbh->prepare($query);
+        $stmt->execute([$r['id_test']]);
+        $pruebas = $stmt->fetchAll();
+        foreach ($pruebas as $p) {
+            echo 'Preuba:' . $p['nombre'] . '</br>';
+        }
+
     } else {
         echo '<h3>Estudiantes:</h3>';
         getEstudiantes($dbh);

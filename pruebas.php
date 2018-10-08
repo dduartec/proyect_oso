@@ -36,16 +36,6 @@ if (!isset($_SESSION)) {
 
   </form>
 
-
-  <form action="upload.php" method="post" enctype="multipart/form-data">
-    enter image id:
-    <input type="text" name="image_id" id="image_id">
-    <br/>
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-  </form>
-
   <p id="test">This is some <b>bold</b> text in a paragraph.</p>
 
   <button id="btn1" class="btn" >Show Text</button>
