@@ -40,7 +40,7 @@ class func
 
         func::createCookie($usuario_nombre, $usuario_id, $token, $usuario_tipo);
         func::createSession($usuario_nombre, $usuario_id, $token, $usuario_tipo);
-
+        
         $stmt = $dbh->prepare('INSERT INTO sessions (usuario_id, usuario_tipo, usuario_nombre, token, fecha) VALUES (:usuario_id,:usuario_tipo,:usuario_nombre,:token ,"' . date("Y-m-d h:i:sa") . '")');
         $stmt->execute(array(':usuario_id' => $usuario_id, ':usuario_nombre' => $usuario_nombre, ':token' => $token, ':usuario_tipo' => $usuario_tipo));
 

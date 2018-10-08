@@ -13,7 +13,7 @@
             $stmt = $dbh->prepare($query1);
             showEstudiantes($dbh, $stmt);
         } elseif (($_SESSION['usuario_tipo'] == 'director')) {
-            //echo'<script language="javascript">window.location="director.php"</script>';
+            echo '<script language="javascript">window.location="director.php"</script>';
         }
     }
     function showEstudiantes($dbh, $stmt)
@@ -69,13 +69,15 @@
             <th>Prueba</th>
             <th>Puntuación</th> 
         </tr>';
+        $pruebas_presentadas = [];
         foreach ($rows as $r) {
             $query = 'SELECT * FROM test WHERE id=?';
             $stmt = $dbh->prepare($query);
             $stmt->execute([$r['id_test']]);
-            $pruebas_presentadas = $stmt->fetch();
+            $prueba = $stmt->fetch();
+            array_push($pruebas_presentadas, $r['id_test']);
             echo "<tr>
-                    <th>" . $pruebas_presentadas['nombre'] . "</th>
+                    <th>" . $prueba['nombre'] . "</th>
                     <th>" . $r['score'] . '</th>
                     </tr>';
 
@@ -86,12 +88,28 @@
         $stmt->execute([$_POST['id']]);
         $rows = $stmt->fetchAll();
         echo '<h4>Pruebas sin presentar</h4>';
-        $query = 'SELECT * FROM test WHERE id<>';
+        $query = 'SELECT * FROM test';
         $stmt = $dbh->prepare($query);
-        $stmt->execute([$r['id_test']]);
+        $stmt->execute();
+        $pruebas = $stmt->fetchAll();
+        $query = 'SELECT * FROM test';
+        $stmt = $dbh->prepare($query);
+        $stmt->execute();
         $pruebas = $stmt->fetchAll();
         foreach ($pruebas as $p) {
-            echo 'Preuba:' . $p['nombre'] . '</br>';
+            if (!in_array($p['id'], $pruebas_presentadas)) {
+                $_SESSION['nombre_test']=$p['nombre'];
+                $_SESSION['id_estudiante']=$_POST['id_estudiante'];
+                /*echo '<form method="get" action="presentar_prueba.php">
+                        <input type="hidden" name="nombre_test" value="' . $p['nombre'] . '" />
+                        <input type="hidden" name="id_test" value="' . $_POST['id_estudiante'] . '" />
+                        <button type="submit" name="" class="btn-prueba">
+                        <h6>Prueba: ' . $p['nombre'] . '</h6>
+                        </button>
+                    </form>';*/
+                echo '<a href="presentar_prueba.php?hello=true"><h6>Prueba: ' . $p['nombre'] . '</h6></a>';
+            }
+
         }
 
     } else {
