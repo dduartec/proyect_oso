@@ -17,7 +17,6 @@ if (!isset($_SESSION)) {
 <div>
 
 
-
   Seleccione el número de preguntas
 
   <select id="mySelect" class="Selection">
@@ -25,6 +24,7 @@ if (!isset($_SESSION)) {
   for ($i = 0; $i <= 3; $i++) {
     if ($i == 0) {
       echo '<option selected></option>';
+      continue;
     }
     echo '<option>' . $i . '</option>';
 

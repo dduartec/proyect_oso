@@ -10,8 +10,7 @@ include_once("header.php");
     <div class="child">
         <?php
             if(!func::checkLoginState($dbh)){
-                header("location:login.php");
-                exit();                
+                header("location: login.php");
             }
             echo "<h1>Bienvenido ".$_SESSION['usuario_nombre'] ." !!!!</h1></br>";
             include("estudiantes.php");

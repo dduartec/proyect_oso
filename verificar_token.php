@@ -6,7 +6,7 @@ include_once("header.php");
 </style>
 </head>
 <section class="parent">
-    <div class="child"> 
+    <div class="child">
 <?php
 function enviarCorreo($correo)
 {
@@ -17,12 +17,21 @@ function enviarCorreo($correo)
     // Si cualquier línea es más larga de 70 caracteres, se debería usar wordwrap()
     $mensaje = wordwrap($mensaje, 70, "\r\n");
     // Enviarlo
-    mail($correo, 'TOKEN DE INGRESO', $mensaje);
+    $return = mail($correo, 'TOKEN DE INGRESO', $mensaje);
+    if(!$return){
+      $message = "ERROR el mensaje no fue enviado de forma exitoas";
+    }else {
+      // code...
+      $message = "el mensaje fue enviado de forma exitoas";
+    }
+    echo "<h1>$message</h1>";
+    echo "<h1>$correo</h1>";
+    echo "<h1>$token</h1>";
     return $token;
 }
 if (func::checkLoginState($dbh)) {
     header("location:index.php");
-    exit();
+
 } else {
     if (isset($_POST['token'])) {
         $token_recibido = $_POST['token_recibido'];
@@ -71,7 +80,7 @@ if (func::checkLoginState($dbh)) {
             </form>
         </div>
     </div>';
-            exit();
+
         }
         $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
         if ($row2['id'] > 0) {
@@ -90,7 +99,6 @@ if (func::checkLoginState($dbh)) {
     </form>
         </div>
     </div>';
-            exit();
         }
         $row3 = $stmt3->fetch(PDO::FETCH_ASSOC);
         if ($row3['id'] > 0) {
@@ -109,7 +117,6 @@ if (func::checkLoginState($dbh)) {
     </form>
         </div>
     </div>';
-            exit();
         }
         if (!$row1['id'] > 0 && !$row2['id'] > 0 && !$row3['id'] > 0) {
             echo '<div class="error"><h3 class="error">' . $row1['id'] . '</h3></div>';
@@ -121,7 +128,7 @@ if (func::checkLoginState($dbh)) {
         header("location:login.php");
     }
 }
-?> 
+?>
 </div>
 </section>
 <?php
