@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 
@@ -10,7 +9,7 @@
   $dbh = new PDO('mysql:host=localhost;dbname=proyect_oso', 'root','');
 
 
-  
+
 
 
 /*
@@ -31,7 +30,6 @@
   }
   */
 ?>
-=======
 <?php /*
 $host_name = 'db746299236.db.1and1.com';
 $database = 'db746299236';
@@ -51,4 +49,3 @@ error_reporting(E_ALL);
 
 $dbh = new PDO('mysql:host=localhost;dbname=proyect_oso', 'root','');
 ?>*/
->>>>>>> a592fe31df4aecae2dd28b26f4ecd47e19ae3b8d

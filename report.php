@@ -2,24 +2,19 @@
 
   include_once("header.php");
 
-  $sql = 'SELECT * FROM estudiantes JOIN  grupos WHERE estudiantes.id = grupos.id_estudiante AND grupos."id_co-tallerista" = 1 ';
-  foreach ($dbh->query($sql) as $row) {
-      print_r($row) ;
-      echo "</br>";
+  $arrayName = array();
 
+  $sql = 'SELECT estudiantes.nombre , estudiantes.documento FROM estudiantes JOIN grupos ON estudiantes.id = 1 and grupos.`id_co-tallerista` = 1 ';
+
+  foreach ($dbh->query($sql) as $row) {
+
+      array_push($arrayName, $row["nombre"]);
   }
 
+
+
   // set the resulting array to associative
-    $arrayName = array();
-    $sql = 'SELECT * FROM estudiantes';
-    foreach ($dbh->query($sql) as $row) {
-        print $row['id'] . "\t";
-        print $row['nombre'] . "\t";
-        print $row['documento'] . "<br/>";
-        array_push($arrayName, $row['nombre']);
-    }
-
-
+  
 ?>
   <select class="" name="">
     <?php
@@ -34,6 +29,4 @@
   </select>
 
 <?php
-
-
 ?>

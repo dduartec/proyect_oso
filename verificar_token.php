@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once("config.php");
 include_once("functions.php");
 if (!isset($_SESSION)) {
@@ -66,7 +66,6 @@ function enviarCorreo($correo)
     echo "<h1>$token</h1>";
     return $token;
 }
-<<<<<<< HEAD
 if (func::checkLoginState($dbh)) {
     header("location:index.php");
 
@@ -89,12 +88,11 @@ if (func::checkLoginState($dbh)) {
         $query1 = "SELECT * FROM psicologos WHERE correo= :correo";
         $query2 = 'SELECT * FROM `co-talleristas` WHERE correo= :correo';
         $query3 = 'SELECT * FROM `directores` WHERE correo= :correo';
-=======
+
  if (isset($_POST['correo'])) {
     $query1 = "SELECT * FROM psicologos WHERE correo= :correo";
     $query2 = 'SELECT * FROM `co-talleristas` WHERE correo= :correo';
     $query3 = 'SELECT * FROM `directores` WHERE correo= :correo';
->>>>>>> a592fe31df4aecae2dd28b26f4ecd47e19ae3b8d
 
     $correo = $_POST['correo'];
 
@@ -124,14 +122,13 @@ if (func::checkLoginState($dbh)) {
             </form>
         </div>
     </div>';
-<<<<<<< HEAD
 
         }
         $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
         if ($row2['id'] > 0) {
             $token = enviarCorreo($correo);
-            echo '<div class="row">
-=======
+            echo '<div class="row">';
+
     }
     $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
     if ($row2['id'] > 0) {
@@ -151,13 +148,11 @@ if (func::checkLoginState($dbh)) {
     </form>
         </div>
     </div>';
-<<<<<<< HEAD
         }
         $row3 = $stmt3->fetch(PDO::FETCH_ASSOC);
         if ($row3['id'] > 0) {
             $token = enviarCorreo($correo);
-            echo '<div class="row">
-=======
+            echo '<div class="row">' ;
     }
     $row3 = $stmt3->fetch(PDO::FETCH_ASSOC);
     if ($row3['id'] > 0) {
@@ -177,32 +172,26 @@ if (func::checkLoginState($dbh)) {
     </form>
         </div>
     </div>';
-<<<<<<< HEAD
         }
         if (!$row1['id'] > 0 && !$row2['id'] > 0 && !$row3['id'] > 0) {
             echo '<div class="error"><h3 class="error">' . $row1['id'] . '</h3></div>';
             echo $row1['id'];
             echo $row2['id'];
-=======
+
     }
     if (!$row1['id'] > 0 && !$row2['id'] > 0 && !$row3['id'] > 0) {
         echo '<div class="error"><h3 class="error">' . $row1['id'] . '</h3></div>';
         echo $row1['id'];
         echo $row2['id'];
->>>>>>> a592fe31df4aecae2dd28b26f4ecd47e19ae3b8d
         //header("location:login.php");
     }
 } else {
-        echo'<script language="javascript">window.location="index.php"</script>';   
+        echo'<script language="javascript">window.location="index.php"</script>';
 }
-<<<<<<< HEAD
 ?>
-=======
 
-?> 
->>>>>>> a592fe31df4aecae2dd28b26f4ecd47e19ae3b8d
 </div>
 </section>
 <?php
-include_once("footer.php");
+  include_once("footer.php");
 ?>
